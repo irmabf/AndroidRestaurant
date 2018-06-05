@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
+import android.view.Menu
+import android.view.MenuItem
 import com.irmabf.androidrestaurant.R
 import com.irmabf.androidrestaurant.fragment.DishFragment
 import com.irmabf.androidrestaurant.model.Tables
@@ -43,4 +45,23 @@ class TablePagerActivity : AppCompatActivity() {
         //Important!! Don´t forget this line or it wont work
         view_pager.adapter = adapter
     }
-}
+    //Pager Navigation menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.pager_navigation, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId){
+            R.id.previous -> {
+                view_pager.currentItem --
+                true
+            }
+            R.id.next -> {
+                view_pager.currentItem ++
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
