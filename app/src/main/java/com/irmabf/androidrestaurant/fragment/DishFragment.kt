@@ -35,7 +35,7 @@ class DishFragment: Fragment() {
             field = value
             if (value != null){
                 dish_image.setImageResource(value.image)
-                dish_name.text = value.description
+                dish_name.text = value.name
                 dish_description.text = value.description
                 //dish_price.text = value.price.toString()
                 dish_price.text = 50f.toString()
