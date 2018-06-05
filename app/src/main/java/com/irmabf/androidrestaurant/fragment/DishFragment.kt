@@ -1,18 +1,34 @@
 package com.irmabf.androidrestaurant.fragment
 import android.app.Fragment
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import com.irmabf.androidrestaurant.R
 import com.irmabf.androidrestaurant.model.Dish
+import com.irmabf.androidrestaurant.model.Table
 
 import kotlinx.android.synthetic.main.fragment_dish.*
 
 class DishFragment: Fragment() {
 
+    companion object {
+
+        val ARG_TABLE = "ARG_TABLE"
+        //Nuevas instancias del TableFragment que devuelve un nuevo fragment
+        fun newInstance(table: Table): Fragment{
+            //Nos creamos el fragment, nueva instancia de DishFragment
+            val fragment = DishFragment()
+            //Nos creamos los argumentos del fragment
+            //Para pasarle argumentos al fragment se usa el bundle metiendo valores como si fuera un diccionario
+            val arguments = Bundle()
+            arguments.putSerializable(ARG_TABLE, table)
+            //Asignamos los argumentos al fragment
+            fragment.arguments = arguments
+            //Devolvemos el fragment
+            return fragment
+        }
+    }
 
     var dish: Dish? = null
         set(value) {
@@ -21,7 +37,8 @@ class DishFragment: Fragment() {
                 dish_image.setImageResource(value.image)
                 dish_name.text = value.description
                 dish_description.text = value.description
-                dish_price.text = value.price.toString()
+                //dish_price.text = value.price.toString()
+                dish_price.text = 50f.toString()
             }
 
          }
@@ -36,22 +53,16 @@ class DishFragment: Fragment() {
      savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater?.inflate(R.layout.fragment_dish, container, false)!!
-
-
     }
 
         override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dish = Dish(
-            "Donut",
-            R.drawable.donut,
-            3f,
-            "Donut con crema",
-            "Ningun alergeno"
-        )
+       if (arguments != null){
+           val table = arguments.getSerializable(ARG_TABLE) as Table
+           dish = table.dish
+       }
 
     }
-
 
 }

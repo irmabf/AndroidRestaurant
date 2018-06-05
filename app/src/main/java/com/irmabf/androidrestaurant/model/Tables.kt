@@ -6,10 +6,8 @@ import java.io.Serializable
 class Tables{
     private val tables: List<Table> = listOf(
             Table("Mesa 1", Dish("Donut", R.drawable.donut, 3f, "Donut Relleno de Crema", "Ninguno")),
-            Table("Mesa 1", Dish("Pizza 4 Quesos", R.drawable.pizza_quesos_plato, 9f, "Pizza a los cuatro quesos hecha en horno de leña", "Lácteos")),
-            Table("Arroz 3 delicias", Dish("Arroz 3 delicias", R.drawable.arroz_delicias, 9f, "Arroz 3 delicias con gambas, jamón y tortilla", "Huevos"))
-
-
+            Table("Mesa 2", Dish("Pizza 4 Quesos", R.drawable.pizza_quesos_plato, 9f, "Pizza a los cuatro quesos hecha en horno de leña", "Lácteos")),
+            Table("Mesa 3", Dish("Arroz 3 delicias", R.drawable.arroz_delicias, 9f, "Arroz 3 delicias con gambas, jamón y tortilla", "Huevos"))
     )
     val count
         get() = tables.size
