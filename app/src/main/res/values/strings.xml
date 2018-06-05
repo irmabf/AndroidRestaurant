@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndroidRestaurant</string>
+    <string name="dish_price">Precio: %.2f €</string>
+    <string name="action_settings">Settings</string>
+</resources>
