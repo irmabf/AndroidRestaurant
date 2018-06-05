@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.ViewPager
 import android.view.Menu
 import android.view.MenuItem
 import com.irmabf.androidrestaurant.R
@@ -20,6 +21,9 @@ import kotlinx.android.synthetic.main.activity_table_pager.*
  * darle los datos que necesita*/
 class TablePagerActivity : AppCompatActivity() {
 
+    //Paginaremos mesas, con lo que instanciamos el modelo de mesas
+    private val tables = Tables()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_table_pager)
@@ -29,8 +33,6 @@ class TablePagerActivity : AppCompatActivity() {
         toolbar.setLogo(R.mipmap.ic_launcher_round)
         //TODO Add custom logo
 
-        //Paginaremos mesas, con lo que instanciamos el modelo de mesas
-        val tables = Tables()
         val adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             //Returns a fragment, a table fragment
             override fun getItem(position: Int): Fragment {
@@ -45,6 +47,20 @@ class TablePagerActivity : AppCompatActivity() {
         }
         //Important!! Don´t forget this line or it wont work
         view_pager.adapter = adapter
+
+        view_pager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(state: Int) {}
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
+            override fun onPageSelected(position: Int) {
+                updateTableInfo(position)
+            }
+        })
+        updateTableInfo(0)
+    }
+    private fun updateTableInfo(position: Int){
+        supportActionBar?.title = tables.getTable(position).name
     }
 
     //Pager Navigation menu
