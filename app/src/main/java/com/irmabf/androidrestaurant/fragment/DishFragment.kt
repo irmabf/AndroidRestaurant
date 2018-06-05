@@ -9,44 +9,49 @@ import android.widget.TextView
 import com.irmabf.androidrestaurant.R
 import com.irmabf.androidrestaurant.model.Dish
 
-import kotlinx.android.synthetic.main.fragment_dish.view.*
+import kotlinx.android.synthetic.main.fragment_dish.*
 
 class DishFragment: Fragment() {
-    lateinit var root: View
+
 
     var dish: Dish? = null
         set(value) {
             field = value
-            //Accedemos a las vistas
-            val dishImage = root.dish_image
-
-            val dishName = root.dish_name
-            val dishDescription = root.dish_description
-            val dishPrice = root.dish_price
-
-            // Actualizo la vista con el modelo
-            value?.let {
-                dishImage.setImageResource(value.image)
-                dishName.text = value.name
-                dishDescription.text = value.description
-
-                val priceString = getString(R.string.dish_price, value.price)
-                dishPrice.text = priceString
-
+            if (value != null){
+                dish_image.setImageResource(value.image)
+                dish_name.text = value.description
+                dish_description.text = value.description
+                dish_price.text = value.price.toString()
             }
-        }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        super.onCreateView(inflater, container, savedInstanceState)
-        if (inflater != null){
-            root = inflater.inflate(R.layout.fragment_dish, container, false)
-            dish = Dish("Donut", R.drawable.donut, 3f, "Donuto con crema", "Ninguno")
-        }
-        return root
-    }
+         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
+
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+     savedInstanceState: Bundle?): View {
+        super.onCreateView(inflater, container, savedInstanceState)
+        return inflater?.inflate(R.layout.fragment_dish, container, false)!!
+
+
+    }
+
+        override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        dish = Dish(
+            "Donut",
+            R.drawable.donut,
+            3f,
+            "Donut con crema",
+            "Ningun alergeno"
+        )
+
+    }
+
+
 }
