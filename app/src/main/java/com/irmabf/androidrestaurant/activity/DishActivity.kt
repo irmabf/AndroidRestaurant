@@ -8,9 +8,6 @@ import com.irmabf.androidrestaurant.R
 
 
 
-
-
-
 class DishActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
