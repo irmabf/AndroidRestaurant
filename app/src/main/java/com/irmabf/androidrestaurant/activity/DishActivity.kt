@@ -14,13 +14,15 @@ class DishActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dish)
-
-        //Add a fragment dynamically
-        val fragment = TableListFragment.newInstance()
-        supportFragmentManager
-                .beginTransaction()
-                //add(dummy gap where the fragment will go, fragment)
-                .add(R.id.table_list_fragment, fragment)
-                .commit()
+        //Check that the fragment is not already loaded in our view hierarchy
+        if(supportFragmentManager.findFragmentById(R.id.table_list) == null){
+            //Add a fragment dynamically
+            val fragment = TableListFragment.newInstance()
+            supportFragmentManager
+                    .beginTransaction()
+                    //add(dummy gap where the fragment will go, fragment)
+                    .add(R.id.table_list_fragment, fragment)
+                    .commit()
+        }
     }
 }
