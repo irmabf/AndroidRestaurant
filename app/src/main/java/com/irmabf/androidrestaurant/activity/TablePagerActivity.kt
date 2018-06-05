@@ -31,11 +31,12 @@ class TablePagerActivity : AppCompatActivity() {
 
         //Paginaremos mesas, con lo que instanciamos el modelo de mesas
         val tables = Tables()
-        val adapter = object: FragmentPagerAdapter(supportFragmentManager){
+        val adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             //Returns a fragment, a table fragment
             override fun getItem(position: Int): Fragment {
                 return DishFragment.newInstance(tables.getTable(position))
             }
+
             override fun getCount() = tables.count
 
             override fun getPageTitle(position: Int): CharSequence? {
@@ -45,6 +46,7 @@ class TablePagerActivity : AppCompatActivity() {
         //Important!! Don´t forget this line or it wont work
         view_pager.adapter = adapter
     }
+
     //Pager Navigation menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
@@ -52,16 +54,31 @@ class TablePagerActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId){
-            R.id.previous -> {
-                view_pager.currentItem --
-                true
-            }
-            R.id.next -> {
-                view_pager.currentItem ++
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
+        R.id.previous -> {
+            view_pager.currentItem--
+            true
         }
+        R.id.next -> {
+            view_pager.currentItem++
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        super.onPrepareOptionsMenu(menu)
+        //1. Save menu item to a variable
+        //We cant´t use kotlin extensions here
+        val previousMenu = menu?.findItem(R.id.previous)
+        val nextMenu = menu?.findItem(R.id.next)
+
+        //To know total number of tables in the app I need the adapter
+        val adapter = view_pager.adapter!!
+        previousMenu?.isEnabled = view_pager.currentItem > 0
+
+        nextMenu?.isEnabled = view_pager.currentItem < adapter.count - 1
+        return true
+    }
+
+}
