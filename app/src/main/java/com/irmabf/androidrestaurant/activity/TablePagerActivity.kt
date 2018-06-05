@@ -36,13 +36,13 @@ class TablePagerActivity : AppCompatActivity() {
         val adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             //Returns a fragment, a table fragment
             override fun getItem(position: Int): Fragment {
-                return DishFragment.newInstance(tables.getTable(position))
+                return DishFragment.newInstance(tables[position])
             }
 
             override fun getCount() = tables.count
 
             override fun getPageTitle(position: Int): CharSequence? {
-                return tables.getTable(position).name
+                return tables[position].name
             }
         }
         //Important!! Don´t forget this line or it wont work
@@ -60,7 +60,7 @@ class TablePagerActivity : AppCompatActivity() {
         updateTableInfo(0)
     }
     private fun updateTableInfo(position: Int){
-        supportActionBar?.title = tables.getTable(position).name
+        supportActionBar?.title = tables[position].name
     }
 
     //Pager Navigation menu

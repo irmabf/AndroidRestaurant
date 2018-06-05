@@ -4,5 +4,6 @@ import java.io.Serializable
 
 data class Table(val name: String, val dish: Dish) : Serializable {
     //constructor(name: String) : this(name, null)
-    //override fun toString(): String = name
+    //Handles issues with data class in listView
+    override fun toString(): String = name
 }

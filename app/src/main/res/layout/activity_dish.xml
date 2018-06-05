@@ -7,11 +7,17 @@
     android:layout_height="match_parent"
     tools:context="com.irmabf.androidrestaurant.activity.DishActivity">
 
-    <fragment
+    <!--<fragment
         android:id="@+id/dish_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.irmabf.androidrestaurant.fragment.DishFragment"/>
-
+        android:name="com.irmabf.androidrestaurant.fragment.TableListFragment"/>
+     -->
+    <!-- dummy gap to be used by a fragment dynamically when needed -->
+    <FrameLayout
+        android:id="@+id/table_list_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+        
 
 </FrameLayout>
