@@ -21,6 +21,12 @@ class TablePagerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_table_pager)
+        //Set up my custom  toolbar as action bar
+        setSupportActionBar(toolbar)
+        //Set toolbar logo
+        toolbar.setLogo(R.mipmap.ic_launcher_round)
+        //TODO Add custom logo
+
         //Paginaremos mesas, con lo que instanciamos el modelo de mesas
         val tables = Tables()
         val adapter = object: FragmentPagerAdapter(supportFragmentManager){

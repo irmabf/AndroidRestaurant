@@ -7,5 +7,14 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    <!-- Delete default Action Bar to use our custom one-->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <!-- Create AppBarOverlay style to give styles to my custom AppBar Layout Toolbar -->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <!-- Pop up options menu styles -->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat"/>
+"
 </resources>
