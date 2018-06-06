@@ -32,7 +32,7 @@ class TablePagerActivity : AppCompatActivity() {
         }
     }
     //Paginaremos mesas, con lo que instanciamos el modelo de mesas
-    private val tables = Tables()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +46,13 @@ class TablePagerActivity : AppCompatActivity() {
         val adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             //Returns a fragment, a table fragment
             override fun getItem(position: Int): Fragment {
-                return DishFragment.newInstance(tables[position])
+                return DishFragment.newInstance(Tables[position])
             }
 
-            override fun getCount() = tables.count
+            override fun getCount() = Tables.count
 
             override fun getPageTitle(position: Int): CharSequence? {
-                return tables[position].name
+                return Tables[position].name
             }
         }
         //Important!! Don´t forget this line or it wont work
@@ -72,7 +72,7 @@ class TablePagerActivity : AppCompatActivity() {
         updateTableInfo(initialTableIndex)
     }
     private fun updateTableInfo(position: Int){
-        supportActionBar?.title = tables[position].name
+        supportActionBar?.title = Tables[position].name
     }
     private fun moveToTable(position: Int){
         view_pager.currentItem = position

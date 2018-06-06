@@ -2,8 +2,8 @@ package com.irmabf.androidrestaurant.model
 
 import com.irmabf.androidrestaurant.R
 import java.io.Serializable
-
-class Tables{
+//Tables singleton
+object Tables{
     private val tables: List<Table> = listOf(
             Table("Mesa 1", Dish("Donut", R.drawable.donut, 3f, "Donut Relleno de Crema", listOf(
                     "1, 2, 3"

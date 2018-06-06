@@ -31,13 +31,11 @@ class TableListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Instance of tables
-        val tables = Tables()
 
         val adapter = ArrayAdapter<Table>(
                 activity,
                 android.R.layout.simple_list_item_1,
-                tables.toArray())
+                Tables.toArray())
         table_list.adapter = adapter
         /*
         ¿Como nos enteramos en el fragment de que el usuario
@@ -45,7 +43,7 @@ class TableListFragment : Fragment() {
         * */
         table_list.setOnItemClickListener{_ ,_ , index, _ ->
             //Avisamos al listener que una mesa ha sido seleccionada
-            onTableSelectedListener?.onTableSelected(tables[index], index)
+            onTableSelectedListener?.onTableSelected(Tables[index], index)
         }
     }
 
