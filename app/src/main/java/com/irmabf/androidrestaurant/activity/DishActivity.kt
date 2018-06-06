@@ -6,10 +6,11 @@ import android.view.Menu
 import android.view.MenuItem
 import com.irmabf.androidrestaurant.R
 import com.irmabf.androidrestaurant.fragment.TableListFragment
+import com.irmabf.androidrestaurant.model.Table
 import kotlinx.android.synthetic.main.activity_dish.*
 
 
-class DishActivity : AppCompatActivity() {
+class DishActivity : AppCompatActivity(), TableListFragment.OnTableSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,5 +25,12 @@ class DishActivity : AppCompatActivity() {
                     .add(R.id.table_list_fragment, fragment)
                     .commit()
         }
+    }
+
+    override fun onTableSelected(table: Table, position: Int) {
+      //Cuando se seleccione una de las filas debemos lanzar la pantalla del view pager
+        //con la lista mesas
+        val intent = TablePagerActivity.intent(this, position)
+        startActivity(intent)
     }
 }

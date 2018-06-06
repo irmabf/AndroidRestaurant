@@ -1,6 +1,8 @@
 package com.irmabf.androidrestaurant.activity
 
 
+import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,6 +12,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.irmabf.androidrestaurant.R
 import com.irmabf.androidrestaurant.fragment.DishFragment
+import com.irmabf.androidrestaurant.model.Table
 import com.irmabf.androidrestaurant.model.Tables
 import kotlinx.android.synthetic.main.activity_table_pager.*
 
@@ -20,7 +23,14 @@ import kotlinx.android.synthetic.main.activity_table_pager.*
  * Un adaptador sirve para a una vista darle su modelo y con el modelo
  * darle los datos que necesita*/
 class TablePagerActivity : AppCompatActivity() {
-
+    companion object {
+        val EXTRA_TABLE = "EXTRA_TABLE"
+        fun intent(context: Context, tableIndex: Int): Intent {
+            val intent = Intent(context, TablePagerActivity::class.java)
+            intent.putExtra(EXTRA_TABLE, tableIndex)
+            return intent
+        }
+    }
     //Paginaremos mesas, con lo que instanciamos el modelo de mesas
     private val tables = Tables()
 
@@ -57,12 +67,16 @@ class TablePagerActivity : AppCompatActivity() {
                 updateTableInfo(position)
             }
         })
-        updateTableInfo(0)
+        val initialTableIndex = intent.getIntExtra(EXTRA_TABLE, 0)
+        moveToTable(initialTableIndex)
+        updateTableInfo(initialTableIndex)
     }
     private fun updateTableInfo(position: Int){
         supportActionBar?.title = tables[position].name
     }
-
+    private fun moveToTable(position: Int){
+        view_pager.currentItem = position
+    }
     //Pager Navigation menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
