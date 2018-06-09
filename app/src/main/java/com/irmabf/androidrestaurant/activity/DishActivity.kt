@@ -39,7 +39,31 @@ class DishActivity : AppCompatActivity(), TableListFragment.OnTableSelectedListe
         }
     }
 
-    override fun onTableSelected(city: Table, position: Int) {
+    override fun onTableSelected(table: Table, position: Int) {
+        /*
+        * Intento buscar el fragment de la derecha en las vistas landscape o tablet, el view_pager_fragment
+        * Si no dicho fragment no existe, doy por hecho que estoy en una interfaz donde no hay un table pager,
+        * con lo que lanzo la actividad en lugar de decirle algo a ese fragment
+        */
+        val tablePagerFragment = supportFragmentManager.findFragmentById(R.id.view_pager_fragment) as? TablePagerFragment
+        /* Si se dan estas condiciones , quiere decir que estamos en una interfaz en la que existe
+        * el fragment view_pager_fragment, y guardamos una referencia a este view_pager_fragment
+         * en la variable tablePagerFragment para poder trabajar con el.
+         * Si existe le decimos que nos queremos mover a la posicion de la mesa que nos pasan como argumento en onTableSelected**/
+
+        if (tablePagerFragment != null){
+            //Estamos en una interfaz dond existe el tablePagerFragment y le decimos que nos mueva a una mesa,
+            //a la mesa que nos pasan como argumento en el metodo onTableSelected(table: Table, position)
+        }else{
+            /*
+            *Si tablePagerFragment es igual a null, estamos en una interfaz donde solo hay una lista de mesas, es decir,
+            * la interfaz para móviles pequeños y lanzamos la actividad del TablePagerActivity, ya que cuando NO tengo que combinar varias
+            * pantallas uso actividades y no fragments. Al tratarse de una actividad us un intent. Iremos a parar a la mesa que pulsemos
+            * */
+            val intent = TablePagerActivity.intent(this, position)
+            startActivity(intent)
+        }
+
         val intent = TablePagerActivity.intent(this, position)
         startActivity(intent)
     }

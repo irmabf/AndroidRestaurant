@@ -50,7 +50,6 @@ class TablePagerFragment: Fragment() {
             override fun getPageTitle(position: Int): CharSequence {
                 return Tables[position].name
             }
-
         }
 
         view_pager.adapter = adapter
@@ -81,7 +80,7 @@ class TablePagerFragment: Fragment() {
         }
     }
 
-    private fun moveToTable(position: Int) {
+    fun moveToTable(position: Int) {
         view_pager.currentItem = position
     }
 
