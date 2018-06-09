@@ -54,6 +54,7 @@ class DishActivity : AppCompatActivity(), TableListFragment.OnTableSelectedListe
         if (tablePagerFragment != null){
             //Estamos en una interfaz dond existe el tablePagerFragment y le decimos que nos mueva a una mesa,
             //a la mesa que nos pasan como argumento en el metodo onTableSelected(table: Table, position)
+            tablePagerFragment.moveToTable(position)
         }else{
             /*
             *Si tablePagerFragment es igual a null, estamos en una interfaz donde solo hay una lista de mesas, es decir,
