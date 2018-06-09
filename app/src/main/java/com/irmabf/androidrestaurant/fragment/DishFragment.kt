@@ -2,9 +2,9 @@ package com.irmabf.androidrestaurant.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.content.Intent
 import android.view.*
-import android.widget.ImageView
-import android.widget.TextView
+
 import com.irmabf.androidrestaurant.R
 import com.irmabf.androidrestaurant.model.Dish
 import com.irmabf.androidrestaurant.model.Table
@@ -56,10 +56,10 @@ class DishFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (arguments != null){
-            val table = arguments!!.getSerializable(ARG_TABLE) as Table
+            val table = arguments?.getSerializable(ARG_TABLE) as Table
             dish = table.dish
     }
-
     }
+
 
 }

@@ -1,6 +1,5 @@
 package com.irmabf.androidrestaurant.fragment
 
-
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
@@ -14,7 +13,7 @@ import com.irmabf.androidrestaurant.R
 import com.irmabf.androidrestaurant.model.Table
 import com.irmabf.androidrestaurant.model.Tables
 import kotlinx.android.synthetic.main.fragment_table_list.*
-import java.text.FieldPosition
+
 
 class TableListFragment : Fragment() {
     companion object {

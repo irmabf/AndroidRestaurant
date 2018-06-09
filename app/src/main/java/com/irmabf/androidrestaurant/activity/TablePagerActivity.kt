@@ -1,6 +1,5 @@
 package com.irmabf.androidrestaurant.activity
 
-
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -12,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.irmabf.androidrestaurant.R
 import com.irmabf.androidrestaurant.fragment.DishFragment
+import com.irmabf.androidrestaurant.fragment.TablePagerFragment
 import com.irmabf.androidrestaurant.model.Table
 import com.irmabf.androidrestaurant.model.Tables
 import kotlinx.android.synthetic.main.activity_table_pager.*
@@ -23,92 +23,60 @@ import kotlinx.android.synthetic.main.activity_table_pager.*
  * Un adaptador sirve para a una vista darle su modelo y con el modelo
  * darle los datos que necesita*/
 class TablePagerActivity : AppCompatActivity() {
+
     companion object {
+
         val EXTRA_TABLE = "EXTRA_TABLE"
-        fun intent(context: Context, tableIndex: Int): Intent {
+
+        fun intent(context: Context,  tableIndex: Int): Intent {
             val intent = Intent(context, TablePagerActivity::class.java)
             intent.putExtra(EXTRA_TABLE, tableIndex)
+
             return intent
         }
     }
-    //Paginaremos mesas, con lo que instanciamos el modelo de mesas
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_table_pager)
-        //Set up my custom  toolbar as action bar
+
+        //toolbar.setLogo(R.mipmap.ic_launcher)
         setSupportActionBar(toolbar)
-        //Set toolbar logo
-        toolbar.setLogo(R.mipmap.ic_launcher_round)
-        //TODO Add custom logo
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val adapter = object : FragmentPagerAdapter(supportFragmentManager) {
-            //Returns a fragment, a table fragment
-            override fun getItem(position: Int): Fragment {
-                return DishFragment.newInstance(Tables[position])
-            }
-
-            override fun getCount() = Tables.count
-
-            override fun getPageTitle(position: Int): CharSequence? {
-                return Tables[position].name
-            }
-        }
-        //Important!! Don´t forget this line or it wont work
-        view_pager.adapter = adapter
-
-        view_pager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
-            override fun onPageScrollStateChanged(state: Int) {}
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-
-            override fun onPageSelected(position: Int) {
-                updateTableInfo(position)
-            }
-        })
         val initialTableIndex = intent.getIntExtra(EXTRA_TABLE, 0)
-        moveToTable(initialTableIndex)
-        updateTableInfo(initialTableIndex)
-    }
-    private fun updateTableInfo(position: Int){
-        supportActionBar?.title = Tables[position].name
-    }
-    private fun moveToTable(position: Int){
-        view_pager.currentItem = position
-    }
-    //Pager Navigation menu
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.pager_navigation, menu)
-        return true
+
+        // Creo, si hace falta, el CityPagerFragment pasándole la ciudad inicial
+        if (supportFragmentManager.findFragmentById(R.id.view_pager_fragment) == null) {
+            // Hay hueco, y habiendo hueco metemos el fragment
+            val fragment = TablePagerFragment.newInstance(initialTableIndex)
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.view_pager_fragment, fragment)
+                    .commit()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
-        R.id.previous -> {
-            view_pager.currentItem--
-            true
-        }
-        R.id.next -> {
-            view_pager.currentItem++
+        android.R.id.home -> { // Nos han llamado a la flecha de back
+            finish()
             true
         }
         else -> super.onOptionsItemSelected(item)
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        super.onPrepareOptionsMenu(menu)
-        //1. Save menu item to a variable
-        //We cant´t use kotlin extensions here
-        val previousMenu = menu?.findItem(R.id.previous)
-        val nextMenu = menu?.findItem(R.id.next)
-
-        //To know total number of tables in the app I need the adapter
-        val adapter = view_pager.adapter!!
-        previousMenu?.isEnabled = view_pager.currentItem > 0
-
-        nextMenu?.isEnabled = view_pager.currentItem < adapter.count - 1
-        return true
-    }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
