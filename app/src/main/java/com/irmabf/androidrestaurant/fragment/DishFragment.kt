@@ -8,6 +8,7 @@ import android.view.*
 import com.irmabf.androidrestaurant.R
 import com.irmabf.androidrestaurant.model.Dish
 import com.irmabf.androidrestaurant.model.Table
+import kotlinx.android.synthetic.main.content_dish.*
 
 import kotlinx.android.synthetic.main.fragment_dish.*
 
