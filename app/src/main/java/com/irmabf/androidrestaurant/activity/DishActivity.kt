@@ -17,13 +17,13 @@ class DishActivity : AppCompatActivity(), TableListFragment.OnTableSelectedListe
         setContentView(R.layout.activity_dish)
 
         // Chuleta para saber detalles del dispositivo real (o emulador) que está ejecutando
-        val metrics = resources.displayMetrics
+        /*val metrics = resources.displayMetrics
         val width = metrics.widthPixels
         val height = metrics.heightPixels
         val dpWidth = (width / metrics.density).toInt()
         val dpHeight = (height / metrics.density).toInt()
         val model = Build.MODEL
-        val androidVersion = Build.VERSION.SDK_INT
+        val androidVersion = Build.VERSION.SDK_INT*/
 
         // Averiguamos qué interfaz hemos cargado
         // Eso lo averiguamos preguntando si en la interfaz tnemos un FrameLayout concreto
