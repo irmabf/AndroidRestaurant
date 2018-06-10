@@ -18,7 +18,7 @@ class DishFragment: Fragment() {
         val ARG_TABLE = "ARG_TABLE"
 
         //Nuevas instancias del TableFragment que devuelve un nuevo fragment
-        fun newInstance(table: Table): Fragment{
+        fun newInstance(table: Table): Fragment {
             //Nos creamos el fragment, nueva instancia de DishFragment
             val fragment = DishFragment()
             //Nos creamos los argumentos del fragment
@@ -32,16 +32,20 @@ class DishFragment: Fragment() {
         }
     }
 
+    private  enum class VIEW_INDEX(val index: Int){
+        LOADING(0), DISH(1)
+    }
+
     var dish: Dish? = null
         set(value) {
             field = value
-            if (value != null){
+            if (value != null) {
                 dish_image.setImageResource(value.image)
                 dish_name.text = value.name
                 dish_description.text = value.description
                 dish_price.text = value.price.toString()
             }
-         }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +59,20 @@ class DishFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (arguments != null){
+
+        //Configuramos las animaciones para el viewswitcher
+        view_switcher.setInAnimation(activity, android.R.anim.fade_in)
+        view_switcher.setOutAnimation(activity, android.R.anim.fade_out)
+
+        //Le decimos al viewswitcher que muestre la primera vista
+        //Con esto sale primero el progress bar
+        view_switcher.displayedChild = VIEW_INDEX.LOADING.index
+
+        view.postDelayed({
             val table = arguments?.getSerializable(ARG_TABLE) as Table
             dish = table.dish
+            //Con esto sale primero la card del dish
+            view_switcher.displayedChild = VIEW_INDEX.DISH.index
+        }, resources.getInteger(R.integer.default_fake_delay).toLong())
     }
-    }
-
-
 }
