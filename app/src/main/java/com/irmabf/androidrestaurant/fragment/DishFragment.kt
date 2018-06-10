@@ -40,7 +40,6 @@ class DishFragment: Fragment() {
                 dish_name.text = value.name
                 dish_description.text = value.description
                 dish_price.text = value.price.toString()
-                prueba.text = "Soy una prueba"
             }
          }
 
