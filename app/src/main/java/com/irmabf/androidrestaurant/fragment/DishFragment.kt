@@ -3,9 +3,12 @@ package com.irmabf.androidrestaurant.fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.content.Intent
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 
 import com.irmabf.androidrestaurant.R
+import com.irmabf.androidrestaurant.adapter.DishRecyclerViewAdapter
 import com.irmabf.androidrestaurant.model.Dish
 import com.irmabf.androidrestaurant.model.Table
 import kotlinx.android.synthetic.main.content_dish.*
@@ -37,14 +40,11 @@ class DishFragment: Fragment() {
         LOADING(0), DISH(1)
     }
 
-    var dish: Dish? = null
+    var dish: List<Dish>? = null
         set(value) {
             field = value
             if (value != null) {
-                dish_image.setImageResource(value.image)
-                dish_name.text = value.name
-                dish_description.text = value.description
-                dish_price.text = value.price.toString()
+                dish_list.adapter = DishRecyclerViewAdapter(value)
             }
         }
 
@@ -70,10 +70,21 @@ class DishFragment: Fragment() {
         view_switcher.displayedChild = VIEW_INDEX.LOADING.index
 
         view.postDelayed({
+            //Aqui simulamos que hemos descargado la informacion sobre los platos
+
+            //Configuramos el RecyclerView.
+            //
+            //1. Primero decimos cómo se visualizan sus elementos
+            dish_list.layoutManager = LinearLayoutManager(activity)
+            //2. Le decimos quien es el que anima al RecyclerView
+            dish_list.itemAnimator = DefaultItemAnimator()
+
+            //3. Por último deicmos los datos que van a rellenar el RecyclerView, tarea del setter de dish
+
             val table = arguments?.getSerializable(ARG_TABLE) as Table
             dish = table.dish
             //Con esto sale primero la card del dish
-            view_switcher.displayedChild = VIEW_INDEX.DISH.index
+            view_switcher?.displayedChild = VIEW_INDEX.DISH.index
         }, resources.getInteger(R.integer.default_fake_delay).toLong())
     }
 }

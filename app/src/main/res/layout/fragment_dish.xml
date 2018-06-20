@@ -14,5 +14,9 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:indeterminate="true"/>
 
-        <include layout="@layout/content_dish"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/dish_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
 </ViewSwitcher>
