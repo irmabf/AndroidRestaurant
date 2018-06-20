@@ -20,7 +20,7 @@
             android:layout_height="100dp"
             android:layout_marginEnd="@dimen/default_margin"
             android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin"
+            android:layout_marginTop="2dp"
             android:scaleType="centerCrop"
             android:src="@drawable/donut"
             app:layout_constraintEnd_toEndOf="parent"
