@@ -12,8 +12,22 @@ import com.irmabf.androidrestaurant.model.Dish
 
 
 class DishRecyclerViewAdapter(private val dish: List<Dish>): RecyclerView.Adapter<DishRecyclerViewAdapter.DishViewHolder>() {
+
+    /*OnClickListener
+
+    *📌 1. El RecyclerViewAdapter va a guardar un clickListener, alguien que
+    * se va a enterar de cuándo se pulsan alguno de los elementos de la lista
+      */
+    var onClickListener: View.OnClickListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DishViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.content_dish, parent, false)
+        view.setOnClickListener { onClickListener?.onClick(it) }
+        /**
+         * 📌 2. Decimos a este view que cuando lo pulsen avise a nuestro onClickListener
+         * 3. Vamos al DishFragmente para suscribirnos
+         * */
+
         return DishViewHolder(view)
     }
 

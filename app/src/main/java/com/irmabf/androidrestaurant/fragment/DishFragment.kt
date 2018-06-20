@@ -9,9 +9,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 
 import com.irmabf.androidrestaurant.R
+import com.irmabf.androidrestaurant.activity.DetailActivity
 import com.irmabf.androidrestaurant.adapter.DishRecyclerViewAdapter
 import com.irmabf.androidrestaurant.model.Dish
 import com.irmabf.androidrestaurant.model.Table
+import com.irmabf.androidrestaurant.model.Tables
 import kotlinx.android.synthetic.main.content_dish.*
 
 import kotlinx.android.synthetic.main.fragment_dish.*
@@ -45,7 +47,9 @@ class DishFragment: Fragment() {
         set(value) {
             field = value
             if (value != null) {
-                dish_list.adapter = DishRecyclerViewAdapter(value)
+                val adapter = DishRecyclerViewAdapter(value)
+                dish_list.adapter = adapter
+                setRecyclerViewClickListener()
             }
         }
 
@@ -87,5 +91,26 @@ class DishFragment: Fragment() {
             //Con esto sale primero la card del dish
             view_switcher?.displayedChild = VIEW_INDEX.DISH.index
         }, resources.getInteger(R.integer.default_fake_delay).toLong())
+    }
+   /* override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser && dish != null) {
+
+        }
+    }*/
+
+    fun setRecyclerViewClickListener() {
+        /***
+         * 📌 3. Si alguien pulsa una fila,  nos queremos enterar
+         */
+        val adapter = dish_list?.adapter as? DishRecyclerViewAdapter
+        adapter?.onClickListener = View.OnClickListener {
+            //Alguien ha pulsado un elemento del recyclerview
+            val dishIndex = dish_list.getChildAdapterPosition(it)
+            val table = arguments?.getSerializable(ARG_TABLE) as Table
+            val tableIndex = Tables.getIndex(table)
+            startActivity(DetailActivity.intent(activity!!, tableIndex, dishIndex))
+
+        }
     }
 }

@@ -66,7 +66,9 @@ object Tables{
     val count
         get() = tables.size
 
-    //fun getTable(index: Int) = tables[index]
+    fun getTable(index: Int) = tables[index]
+
+    fun getIndex(table: Table) = tables.indexOf(table)
     //Use operator overloading kotlin feature  to override [] array operator with a new functionality
     operator fun get(index: Int) = tables[index]
 
