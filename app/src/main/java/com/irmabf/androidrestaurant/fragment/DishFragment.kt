@@ -3,6 +3,7 @@ package com.irmabf.androidrestaurant.fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.content.Intent
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
@@ -109,7 +110,15 @@ class DishFragment: Fragment() {
             val dishIndex = dish_list.getChildAdapterPosition(it)
             val table = arguments?.getSerializable(ARG_TABLE) as Table
             val tableIndex = Tables.getIndex(table)
-            startActivity(DetailActivity.intent(activity!!, tableIndex, dishIndex))
+
+            //Opciones especiales para navegar con vistas comunes
+            val animationOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    activity!!,
+                    it,
+                    getString(R.string.transition_to_detail)
+
+            )
+            startActivity(DetailActivity.intent(activity!!, tableIndex, dishIndex), animationOptions.toBundle())
 
         }
     }
