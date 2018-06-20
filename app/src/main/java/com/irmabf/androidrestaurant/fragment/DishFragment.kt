@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.content.Intent
 import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 
@@ -75,7 +76,7 @@ class DishFragment: Fragment() {
             //Configuramos el RecyclerView.
             //
             //1. Primero decimos cómo se visualizan sus elementos
-            dish_list.layoutManager = LinearLayoutManager(activity)
+            dish_list.layoutManager = GridLayoutManager(activity, resources.getInteger(R.integer.dish_columns))
             //2. Le decimos quien es el que anima al RecyclerView
             dish_list.itemAnimator = DefaultItemAnimator()
 
