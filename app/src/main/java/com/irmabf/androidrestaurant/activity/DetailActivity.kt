@@ -7,7 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.irmabf.androidrestaurant.R
 import com.irmabf.androidrestaurant.model.Tables
-import kotlinx.android.synthetic.main.content_dish.*
+import kotlinx.android.synthetic.main.activity_detail.*
+
 
 class DetailActivity : AppCompatActivity() {
 
@@ -34,7 +35,7 @@ class DetailActivity : AppCompatActivity() {
         dish_image?.setImageResource(dish.image)
         dish_name?.text = dish.name
 
-        //dish_description?.text = dish.description
+        dish_description?.text = dish.description
         dish_price?.text = dish.price.toString()
 
     }
