@@ -10,7 +10,6 @@ import com.irmabf.androidrestaurant.R
 import com.irmabf.androidrestaurant.model.Dish
 import kotlinx.android.synthetic.main.activity_detail.*
 
-
 class DetailActivity : AppCompatActivity() {
 
     companion object {
@@ -70,7 +69,5 @@ class DetailActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-
 
 }

@@ -26,10 +26,10 @@ class TablePagerFragment: Fragment() {
         }
     }
 
-    lateinit var root: View
-    val pager by lazy { root.findViewById<ViewPager>(R.id.view_pager) }
+    private lateinit var root: View
+    private val pager by lazy { root.findViewById<ViewPager>(R.id.view_pager) }
 
-    var initialTableIndex = 0
+    private var initialTableIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,22 +66,17 @@ class TablePagerFragment: Fragment() {
                 override fun onPageSelected(position: Int) {
                     updateTableInfo(position)
                 }
-
             })
-
             pager.currentItem = initialTableIndex
             updateTableInfo(initialTableIndex)
         }
-
         return root
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.pager_navigation, menu)
     }
-
     override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
         R.id.previous -> {
             pager.currentItem = pager.currentItem - 1
@@ -93,8 +88,6 @@ class TablePagerFragment: Fragment() {
         }
         else -> super.onOptionsItemSelected(item)
     }
-
-
     override fun onPrepareOptionsMenu(menu: Menu?) {
         super.onPrepareOptionsMenu(menu)
 

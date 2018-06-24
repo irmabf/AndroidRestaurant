@@ -1,6 +1,5 @@
 package com.irmabf.androidrestaurant.fragment
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -17,15 +16,6 @@ import com.irmabf.androidrestaurant.adapter.DishRecyclerViewAdapter
 import com.irmabf.androidrestaurant.model.Dish
 import com.irmabf.androidrestaurant.model.Table
 import kotlinx.android.synthetic.main.dish_list.*
-
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import org.jetbrains.anko.coroutines.experimental.bg
-import org.json.JSONObject
-import java.net.URL
-import java.util.*
-
 
 class DishFragment : Fragment() {
 
@@ -82,9 +72,7 @@ class DishFragment : Fragment() {
                     val dishToShow = value[position]
                     // Lanzamos la actividad
                     startActivity(DetailActivity.intent(activity, dishToShow))
-
                 }
-
                 adapter.buttonListener = object : DishRecyclerViewAdapter.ButtonListener {
                     override fun addDish(dish: Dish) {
 
@@ -105,14 +93,11 @@ class DishFragment : Fragment() {
                         Toast.makeText(activity, "Plato eliminado: ${dish.name}", Toast.LENGTH_SHORT)
                                 .show()
                     }
-
                     override fun addNotes(position: Int) {
                         Toast.makeText(activity, "Notas añadidas al plato: ${position}", Toast.LENGTH_SHORT)
                                 .show()
                     }
-
                 }
-
 
                 viewSwitcher.displayedChild = VIEW_INDEX.DISH.index
                 // SuperCache
@@ -121,8 +106,6 @@ class DishFragment : Fragment() {
                 adapter.notifyDataSetChanged()
 
             }
-
-
         }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -148,13 +131,10 @@ class DishFragment : Fragment() {
             // El RecyclerView necesita un adapter,
             // aunque aquí aún no podemos ponerlo, ya que no tenemos los datos
 
-
             if (arguments != null) {
                 table = arguments!!.getSerializable(ARG_TABLE) as? Table
             }
-
         }
-
         return root
     }
 
@@ -165,13 +145,10 @@ class DishFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser && dish != null) {
             dishList.adapter.notifyDataSetChanged()
         }
-
-
     }
 }

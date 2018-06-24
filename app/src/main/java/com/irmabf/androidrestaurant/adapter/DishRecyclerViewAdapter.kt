@@ -157,8 +157,8 @@ class DishRecyclerViewAdapter(val dish: List<Dish>) : RecyclerView.Adapter<DishR
             addNotesButton.setOnClickListener(){
                 val editText = EditText(context)
                 AlertDialog.Builder(context)
-                        .setTitle("Añade notas al plato")
-                        .setMessage("Introduce los cambios que quieras en el plato")
+                        .setTitle("NOTAS")
+                        .setMessage("Cambios a tener en cuenta")
                         .setView(editText)
                         .setPositiveButton(android.R.string.ok, { _, _ ->
                             var notes = editText.getText().toString()

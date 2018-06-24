@@ -45,7 +45,6 @@ class TableListFragment : Fragment() {
             onTableSelectedListener?.onTableSelected(Tables[index], index)
         }
     }
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         commonAtach(context as Activity?)
@@ -66,7 +65,6 @@ class TableListFragment : Fragment() {
             onTableSelectedListener = null
         }
     }
-
     override fun onDetach() {
         super.onDetach()
         onTableSelectedListener = null
