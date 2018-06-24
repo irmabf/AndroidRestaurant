@@ -1,38 +1,139 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.TablePagerActivity">
+    android:padding="@dimen/default_margin">
 
-    <android.support.design.widget.AppBarLayout
+    <ImageView
+        android:id="@+id/dish_image"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/coffee" />
+
+
+    <TextView
+        android:id="@+id/dish_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/dish_image"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        tools:text="Nombre del Plato" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+
+    <TextView
+        android:id="@+id/dish_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/dish_name"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        tools:text="Precio" />
+
+    <ScrollView
+        android:id="@+id/dish_description_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/dish_price">
+
+        <TextView
+            android:id="@+id/dish_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_marginBottom="@dimen/default_margin"
+            tools:text="Descripción" />
+    </ScrollView>
 
-    </android.support.design.widget.AppBarLayout>
-
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:transitionName="@string/transition_to_detail"
-        tools:context=".activity.DetailActivity">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/dish_description_scroll_view"
+        >
 
-    <include layout="@layout/content_dish"/>
+       <!-- <ImageView
+            android:id="@+id/alergen_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/alergen_01"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:contentDescription="@string/allergen01_image"
+            />
 
-    </FrameLayout>
+        <ImageView
+            android:id="@+id/alergen_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:src="@drawable/alergen_02"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:contentDescription="@string/allergen02"
+            />
 
-</android.support.design.widget.CoordinatorLayout>
+        <ImageView
+            android:id="@+id/alergen_3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:src="@drawable/alergen_03"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:contentDescription="@string/allergen03"/>
+
+        <ImageView
+            android:id="@+id/alergen_4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:src="@drawable/alergen_04"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:contentDescription="@string/allergen04"/>-->
+
+        <!--<ImageView
+            android:id="@+id/alergen_5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:src="@drawable/alergen_05"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:contentDescription="@string/allergen05"/>-->
+
+        <!--<ImageView
+            android:id="@+id/alergen_6"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:src="@drawable/alergen_06"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:contentDescription="@string/allergen06"/>-->
+    </LinearLayout>
 
 
+
+</RelativeLayout>

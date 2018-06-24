@@ -33,7 +33,8 @@ class DetailActivity : AppCompatActivity() {
         //Actualizamos la interfaz
         dish_image?.setImageResource(dish.image)
         dish_name?.text = dish.name
-        dish_description?.text = dish.description
+
+        //dish_description?.text = dish.description
         dish_price?.text = dish.price.toString()
 
     }
