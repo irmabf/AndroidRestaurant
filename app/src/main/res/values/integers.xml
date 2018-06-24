@@ -2,4 +2,5 @@
 <resources>
     <integer name="default_fake_delay">3000</integer>
     <integer name="dish_columns">1</integer>
+    <integer name="recycler_view_columns">1</integer>
 </resources>

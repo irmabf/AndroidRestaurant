@@ -4,16 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
-import android.view.Menu
 import android.view.MenuItem
 import com.irmabf.androidrestaurant.R
-import com.irmabf.androidrestaurant.fragment.DishFragment
 import com.irmabf.androidrestaurant.fragment.TablePagerFragment
-import com.irmabf.androidrestaurant.model.Table
-import com.irmabf.androidrestaurant.model.Tables
 import kotlinx.android.synthetic.main.activity_table_pager.*
 
 /**Implementamos un view pager para poder deslizar entre pantallas,
@@ -47,22 +40,22 @@ class TablePagerActivity : AppCompatActivity() {
         val initialTableIndex = intent.getIntExtra(EXTRA_TABLE, 0)
 
         // Creo, si hace falta, el CityPagerFragment pasándole la ciudad inicial
-        if (supportFragmentManager.findFragmentById(R.id.view_pager_fragment) == null) {
+        if (supportFragmentManager.findFragmentById(R.id.fragment_table_pager) == null) {
             // Hay hueco, y habiendo hueco metemos el fragment
             val fragment = TablePagerFragment.newInstance(initialTableIndex)
             supportFragmentManager.beginTransaction()
-                    .add(R.id.view_pager_fragment, fragment)
+                    .add(R.id.fragment_table_pager, fragment)
                     .commit()
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
+    /*override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
         android.R.id.home -> { // Nos han llamado a la flecha de back
             finish()
             true
         }
         else -> super.onOptionsItemSelected(item)
-    }
+    }*/
 
 }
 

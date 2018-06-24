@@ -13,6 +13,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:contentDescription="@string/dish_image"
         android:scaleType="centerCrop"
         android:src="@drawable/coffee" />
 
@@ -67,11 +68,11 @@
         android:layout_below="@id/dish_description_scroll_view"
         >
 
-       <!-- <ImageView
+        <ImageView
             android:id="@+id/alergen_1"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/alergen_01"
+            android:src="@drawable/alergen_almond"
             android:visibility="gone"
             tools:visibility="visible"
             android:contentDescription="@string/allergen01_image"
@@ -83,7 +84,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginStart="@dimen/default_margin"
-            android:src="@drawable/alergen_02"
+            android:src="@drawable/alergen_egg"
             android:visibility="gone"
             tools:visibility="visible"
             android:contentDescription="@string/allergen02"
@@ -95,7 +96,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginStart="@dimen/default_margin"
-            android:src="@drawable/alergen_03"
+            android:src="@drawable/alergen_milk"
             android:visibility="gone"
             tools:visibility="visible"
             android:contentDescription="@string/allergen03"/>
@@ -106,32 +107,32 @@
             android:layout_height="50dp"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginStart="@dimen/default_margin"
-            android:src="@drawable/alergen_04"
+            android:src="@drawable/alergen_crustaceans"
             android:visibility="gone"
             tools:visibility="visible"
-            android:contentDescription="@string/allergen04"/>-->
+            android:contentDescription="@string/allergen04"/>
 
-        <!--<ImageView
+        <ImageView
             android:id="@+id/alergen_5"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginStart="@dimen/default_margin"
-            android:src="@drawable/alergen_05"
+            android:src="@drawable/alergen_gluten"
             android:visibility="gone"
             tools:visibility="visible"
-            android:contentDescription="@string/allergen05"/>-->
+            android:contentDescription="@string/allergen05"/>
 
-        <!--<ImageView
+        <ImageView
             android:id="@+id/alergen_6"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="@dimen/default_margin"
             android:layout_marginStart="@dimen/default_margin"
-            android:src="@drawable/alergen_06"
+            android:src="@drawable/alergen_fish"
             android:visibility="gone"
             tools:visibility="visible"
-            android:contentDescription="@string/allergen06"/>-->
+            android:contentDescription="@string/allergen06"/>
     </LinearLayout>
 
 

@@ -9,16 +9,16 @@ import android.view.*
 import com.irmabf.androidrestaurant.R
 import com.irmabf.androidrestaurant.model.Tables
 import kotlinx.android.synthetic.main.activity_table_pager.*
+import kotlinx.android.synthetic.main.fragment_dish.*
 import kotlinx.android.synthetic.main.fragment_table_pager.*
 
 class TablePagerFragment: Fragment() {
-
     companion object {
-        val ARG_TABLE = "ARG_TABLE"
+        val ARG_TABLE_INDEX = "ARG_TABLE_INDEX"
 
         fun newInstance(tableIndex: Int): TablePagerFragment {
             val arguments = Bundle()
-            arguments.putInt(ARG_TABLE, tableIndex)
+            arguments.putInt(ARG_TABLE_INDEX, tableIndex)
             val fragment = TablePagerFragment()
             fragment.arguments = arguments
 
@@ -26,63 +26,56 @@ class TablePagerFragment: Fragment() {
         }
     }
 
+    lateinit var root: View
+    val pager by lazy { root.findViewById<ViewPager>(R.id.view_pager) }
+
+    var initialTableIndex = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setHasOptionsMenu(true)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_table_pager, container, false)
-    }
+        if (inflater != null) {
+            root = inflater.inflate(R.layout.fragment_table_pager, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+            // Operador Elvis!! oh yeah!
+            initialTableIndex = arguments?.getInt(ARG_TABLE_INDEX) ?: 0
 
-        val adapter = object: FragmentPagerAdapter(fragmentManager) {
-            override fun getItem(position: Int): Fragment {
-                return DishFragment.newInstance(Tables[position])
+            val adapter = object: FragmentPagerAdapter(fragmentManager) {
+                override fun getItem(position: Int) = DishFragment.newInstance(Tables[position])
+
+                override fun getCount() = Tables.count
+
+                override fun getPageTitle(position: Int) = Tables[position].name
             }
 
-            override fun getCount() = Tables.count
+            // le digo el límite de pager
+            pager.offscreenPageLimit = 10
+            // le digo su adapter
+            pager.adapter = adapter
 
-            override fun getPageTitle(position: Int): CharSequence {
-                return Tables[position].name
-            }
-        }
+            // Método para cambiar el título al cambiar de ViewPager
+            pager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
+                override fun onPageScrollStateChanged(state: Int) {}
 
-        view_pager.adapter = adapter
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
-        view_pager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {}
+                override fun onPageSelected(position: Int) {
+                    updateTableInfo(position)
+                }
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+            })
 
-            override fun onPageSelected(position: Int) {
-                updateTableInfo(position)
-            }
-        })
-
-        val initialTableIndex = arguments?.getInt(ARG_TABLE, 0)
-
-
-        if (initialTableIndex != null) {
-            moveToTable(initialTableIndex)
+            pager.currentItem = initialTableIndex
             updateTableInfo(initialTableIndex)
         }
+
+        return root
     }
 
-    private fun updateTableInfo(position: Int) {
-        if (activity is AppCompatActivity) {
-            val supportActionBar = (activity as? AppCompatActivity)?.supportActionBar
-            supportActionBar?.title = Tables[position].name
-        }
-    }
-
-    fun moveToTable(position: Int) {
-        view_pager.currentItem = position
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -91,24 +84,36 @@ class TablePagerFragment: Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
         R.id.previous -> {
-            view_pager.currentItem = view_pager.currentItem - 1
+            pager.currentItem = pager.currentItem - 1
             true
         }
         R.id.next -> {
-            view_pager.currentItem = view_pager.currentItem + 1
+            pager.currentItem++
             true
         }
         else -> super.onOptionsItemSelected(item)
     }
 
+
     override fun onPrepareOptionsMenu(menu: Menu?) {
         super.onPrepareOptionsMenu(menu)
 
-        val previousMenu = menu?.findItem(R.id.previous)
-        val nextMenu = menu?.findItem(R.id.next)
+        val menuPrev = menu?.findItem(R.id.previous)
+        menuPrev?.setEnabled(pager.currentItem > 0)
 
-        val adapter = view_pager.adapter!!
-        previousMenu?.isEnabled = view_pager.currentItem > 0
-        nextMenu?.isEnabled = view_pager.currentItem < adapter.count - 1
+        val menuNext = menu?.findItem(R.id.next)
+        menuNext?.setEnabled(pager.currentItem < Tables.count-1)
+
+    }
+
+    fun updateTableInfo(position: Int) {
+        if (activity is AppCompatActivity) {
+            val supportActionBar = (activity as? AppCompatActivity)?.supportActionBar
+            supportActionBar?.title = Tables[position].name
+        }
+    }
+
+    fun moveToTable(position: Int) {
+        pager.currentItem = position
     }
 }

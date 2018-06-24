@@ -6,7 +6,11 @@
     <string name="next">Siguiente</string>
     <string name="add_dish_button">+</string>
     <string name="remove_dish_button">-</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="transition_to_detail">transition_to_detail</string>
+    <string name="allergen01_image">Allergen01</string>
+    <string name="allergen02">Allergen02</string>
+    <string name="allergen03">Allergen03</string>
+    <string name="allergen04">Allergen04</string>
+    <string name="allergen05">Allergen05</string>
+    <string name="allergen06">Allergen06</string>
+    <string name="dish_image">Imagen del plato</string>
 </resources>

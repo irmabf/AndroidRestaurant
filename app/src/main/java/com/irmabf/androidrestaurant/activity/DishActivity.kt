@@ -1,6 +1,5 @@
 package com.irmabf.androidrestaurant.activity
 
-import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.ViewGroup
@@ -40,11 +39,11 @@ class DishActivity : AppCompatActivity(), TableListFragment.OnTableSelectedListe
             }
         }
 
-        if (findViewById<ViewGroup>(R.id.view_pager_fragment) != null) {
+        if (findViewById<ViewGroup>(R.id.fragment_table_pager) != null) {
             // Hemos cargado una interfaz que tiene el hueco para el fragment TablePagerFragment
-            if (supportFragmentManager.findFragmentById(R.id.view_pager_fragment) == null) {
+            if (supportFragmentManager.findFragmentById(R.id.fragment_table_pager) == null) {
                 supportFragmentManager.beginTransaction()
-                        .add(R.id.view_pager_fragment, TablePagerFragment.newInstance(0))
+                        .add(R.id.fragment_table_pager, TablePagerFragment.newInstance(0))
                         .commit()
             }
         }
@@ -56,7 +55,7 @@ class DishActivity : AppCompatActivity(), TableListFragment.OnTableSelectedListe
         * Si no dicho fragment no existe, doy por hecho que estoy en una interfaz donde no hay un table pager,
         * con lo que lanzo la actividad en lugar de decirle algo a ese fragment
         */
-        val tablePagerFragment = supportFragmentManager.findFragmentById(R.id.view_pager_fragment) as? TablePagerFragment
+        val tablePagerFragment = supportFragmentManager.findFragmentById(R.id.fragment_table_pager) as? TablePagerFragment
         /* Si se dan estas condiciones , quiere decir que estamos en una interfaz en la que existe
         * el fragment view_pager_fragment, y guardamos una referencia a este view_pager_fragment
          * en la variable tablePagerFragment para poder trabajar con el.

@@ -24,7 +24,7 @@
     custom toolbar fixes issues like toolbar covering layout content,
      we also need to use app:layout_beahavior= "@string/appbar_scrolling_view_behaviour-->
     <FrameLayout
-        android:id="@+id/view_pager_fragment"
+        android:id="@+id/fragment_table_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
